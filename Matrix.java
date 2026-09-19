@@ -21,7 +21,15 @@ public class Matrix {
     }
 
     public Matrix(Complex[][] data){
+        this.rows = data.length;
+        this.cols = data[0].length;
+        for (int i = 0; i < rows; i++) {
+            if (data[i].length != cols){
+                throw new IllegalArgumentException("Rows are not equal");
+            }
 
+            System.arraycopy(data[i], 0, this.data[i], 0 , cols);
+        }
     }
 
     public int getRows() {
