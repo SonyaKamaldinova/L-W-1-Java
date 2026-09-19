@@ -28,7 +28,6 @@ public class Matrix {
             if (data[i].length != cols){
                 throw new IllegalArgumentException("Rows are not equal");
             }
-
             System.arraycopy(data[i], 0, this.data[i], 0 , cols);
         }
     }
@@ -67,7 +66,6 @@ public class Matrix {
                 result.set(i, j, data[i][j].add(other.get(i, j)));
             }
         }
-
         return result;
     }
 
