@@ -1,7 +1,7 @@
 public class Matrix {
 
-    private final int rows;
-    private final int cols;
+    private int rows;
+    private int cols;
     private Complex[][] data;
 
     public Matrix(int rows, int cols){
@@ -14,8 +14,14 @@ public class Matrix {
         this.data = new Complex[rows][cols];
 
         for (int i = 0; i < rows; i++) {
-
+            for (int j = 0; j < cols; j++){
+                data[i][j] = new Complex(0, 0);
+            }
         }
+    }
+
+    public Matrix(Complex[][] data){
+
     }
 
     public int getRows() {
@@ -28,5 +34,9 @@ public class Matrix {
 
     public Complex get(int row, int col){
         return data[row][col];
+    }
+
+    public void set(int row, int col, Complex value) {
+        data[row][col] = value;
     }
 }
