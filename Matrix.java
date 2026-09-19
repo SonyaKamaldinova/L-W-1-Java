@@ -88,6 +88,16 @@ public class Matrix {
         return result;
     }
 
+    public Matrix multipy(Complex number){
+        Matrix result = new Matrix(cols, rows);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++){
+                result.set(i, j, data[i][j].multiply(number));
+            }
+        }
+        return result;
+    }
+
     public Matrix transpose(){
         Matrix result = new Matrix(cols, rows);
         for (int i = 0; i < rows; i++) {
@@ -96,6 +106,46 @@ public class Matrix {
             }
         }
         return result;
+    }
+
+    public Complex determinant(){
+        if (rows != cols){
+            throw new IllegalArgumentException("Do not have determimant");
+        }
+        Complex[][] copy = new Complex[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                copy[i][j] = data[i][j];
+            }
+        }
+        Complex determinant = new Complex(1, 0);
+        for (int i = 0; i < rows; i++) {
+            int pivotRow = i;
+            for (int j = i + 1; j < rows; j++) {
+                if (copy[j][i].abs() > copy[pivotRow][i].abs()) {
+                    pivotRow = j;
+                }
+            }
+            if (copy[pivotRow][i].abs() < 1e-10) {
+                return new Complex(0, 0);
+
+            }
+            if (pivotRow != i) {
+                Complex[] tmp = copy[i];
+                copy[i] = copy[pivotRow];
+                copy[pivotRow] = tmp;
+                determinant = determinant.multiply(new Complex(-1, 0));
+            }
+            Complex pivot = copy[i][i];
+            determinant = determinant.multiply(pivot);
+            for (int j = i + 1; j < rows; j++) {
+                Complex factor = copy[j][i].divide(pivot);
+                for (int k = i; k < cols; k++) {
+                    copy[j][k] = copy[j][k].subtract(factor.multiply(copy[i][k]));
+                }
+            }
+        }
+        return determinant;
     }
 }
 
