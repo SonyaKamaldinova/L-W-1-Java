@@ -1,8 +1,8 @@
 public class Matrix {
 
-    private int rows;
-    private int cols;
-    private Complex[][] data;
+    private final int rows;
+    private final int cols;
+    private final Complex[][] data;
 
     public Matrix(int rows, int cols){
         if (rows <= 0 || cols <= 0){
@@ -53,7 +53,7 @@ public class Matrix {
             for (int j = 0; j < cols; j++){
                 System.out.print(data[i][j].toString() + " ");
             }
-            System.out.println("");
+            System.out.println();
         }
     }
     public Matrix add(Matrix other){
@@ -114,9 +114,7 @@ public class Matrix {
         }
         Complex[][] copy = new Complex[rows][cols];
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                copy[i][j] = data[i][j];
-            }
+            System.arraycopy(data[i], 0, copy[i], 0, cols);
         }
         Complex determinant = new Complex(1, 0);
         for (int i = 0; i < rows; i++) {
@@ -155,9 +153,7 @@ public class Matrix {
         }
         Complex[][] augmented = new Complex[rows][2*rows];
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < rows; j++) {
-                augmented[i][j] = data[i][j];
-            }
+            System.arraycopy(data[i], 0, augmented[i], 0, rows);
             for (int j = 0; j < rows; j++) {
                 augmented[i][j + rows] = (i == j) ? new Complex(1, 0) : new Complex(0, 0);
             }
@@ -193,9 +189,7 @@ public class Matrix {
         }
         Complex[][] result = new Complex[rows][rows];
         for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < rows; j++) {
-                result[i][j] = augmented[i][j + rows];
-            }
+            System.arraycopy(augmented[i], 0 + rows, result[i], 0, rows);
         }
         return new Matrix(result);
     }
