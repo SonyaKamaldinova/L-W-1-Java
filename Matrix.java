@@ -69,4 +69,22 @@ public class Matrix {
         return result;
     }
 
+    public Matrix multipy(Matrix other){
+        if (cols != other.getRows()){
+            throw new IllegalArgumentException("Can not multipy");
+        }
+
+        Matrix result = new Matrix(rows, other.getCols());
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < other.getCols(); j++) {
+                Complex sum = new Complex(0, 0);
+                for (int k = 0; k < cols; k++) {
+                    sum = sum.add(data[i][k].multiply(other.get(k, j)));
+                }
+                result.set(i, j, sum);
+            }
+        }
+        return result;
+    }
 }
