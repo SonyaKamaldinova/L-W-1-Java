@@ -30,6 +30,19 @@ public class Complex {
         return new Complex(newReal, newImaginary);
     }
 
+    public Complex divide(Complex other) {
+        double denominator = other.getReal()*other.getReal() + other.getImaginary()*other.getImaginary();
+        if (denominator == 0) {
+            throw new ArithmeticException("Divided on null");
+        }
+        return new Complex((real * other.real + imaginary * other.imaginary) / denominator,
+                (imaginary * other.real - real * other.imaginary) / denominator);
+    }
+
+    public double abs(){
+        return Math.pow(real*real + imaginary*imaginary, 0.5);
+    }
+
     @Override
     public String toString(){
         if (imaginary > 0) {
@@ -37,7 +50,7 @@ public class Complex {
         }
 
         if (imaginary < 0) {
-            return real + "-" + imaginary + "i";
+            return real + "" + imaginary + "i";
         }
         return String.valueOf(real);
     }
