@@ -69,7 +69,7 @@ public class Matrix {
         return result;
     }
 
-    public Matrix multipy(Matrix other){
+    public Matrix multiply(Matrix other){
         if (cols != other.getRows()){
             throw new IllegalArgumentException("Can not multipy");
         }
@@ -88,7 +88,7 @@ public class Matrix {
         return result;
     }
 
-    public Matrix multipy(Complex number){
+    public Matrix multiply(Complex number){
         Matrix result = new Matrix(cols, rows);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++){
@@ -145,6 +145,64 @@ public class Matrix {
             }
         }
         return determinant;
+    }
+
+
+
+    public Matrix inverse() {
+        if (rows != cols) {
+            throw new IllegalArgumentException("No inverse matrix");
+        }
+        Complex[][] augmented = new Complex[rows][2*rows];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < rows; j++) {
+                augmented[i][j] = data[i][j];
+            }
+            for (int j = 0; j < rows; j++) {
+                augmented[i][j + rows] = (i == j) ? new Complex(1, 0) : new Complex(0, 0);
+            }
+        }
+        for (int i = 0; i < rows; i++) {
+            int pivotRow = i;
+            for (int j = i + 1; j < rows; j++) {
+                if (augmented[j][i].abs() > augmented[pivotRow][i].abs()) {
+                    pivotRow = j;
+                }
+            }
+            if (augmented[pivotRow][i].abs() == 0) {
+                throw new ArithmeticException("Matrix is irreversible");
+            }
+            if (pivotRow != i) {
+                Complex[] copy = augmented[i];
+                augmented[i] = augmented[pivotRow];
+                augmented[pivotRow] = copy;
+            }
+            Complex pivot = augmented[i][i];
+            for (int j = 0; j < 2*rows; j++) {
+                augmented[i][j] = augmented[i][j].divide(pivot);
+            }
+            for (int j = 0; j < rows; j++) {
+                if (j == i) {
+                    continue;
+                }
+                Complex factor = augmented[j][i];
+                for (int k = 0; k < 2*rows; k++) {
+                    augmented[j][k] = augmented[j][k].subtract(factor.multiply(augmented[i][k]));
+                }
+            }
+        }
+        Complex[][] result = new Complex[rows][rows];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < rows; j++) {
+                result[i][j] = augmented[i][j + rows];
+            }
+        }
+        return new Matrix(result);
+    }
+
+    public Matrix divide(Matrix other) {
+        return this.multiply(other.inverse());
+
     }
 }
 
