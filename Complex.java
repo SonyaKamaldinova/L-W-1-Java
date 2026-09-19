@@ -16,21 +16,18 @@ public class Complex {
         return imaginary;
     }
 
-    public void add(Complex other){
-        real += other.getReal();
-        imaginary += other.getImaginary();
+    public Complex add(Complex other){
+        return new Complex(real += other.getReal(), imaginary += other.getImaginary());
     }
 
-    public void subtract(Complex other){
-        real -= other.getReal();
-        imaginary -= other.getImaginary();
+    public Complex subtract(Complex other){
+        return new Complex(real -= other.getReal(), imaginary -= other.getImaginary());
     }
 
-    public void multiply(Complex other){
+    public Complex multiply(Complex other){
         double newReal = real*other.getReal() - imaginary*other.getImaginary();
         double newImaginary = real*other.getImaginary() + imaginary*other.getReal();
-        real = newReal;
-        imaginary = newImaginary;
+        return new Complex(newReal, newImaginary);
     }
 
     @Override
