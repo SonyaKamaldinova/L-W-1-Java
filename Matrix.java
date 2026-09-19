@@ -23,6 +23,7 @@ public class Matrix {
     public Matrix(Complex[][] data){
         this.rows = data.length;
         this.cols = data[0].length;
+        this.data = new Complex[rows][cols];
         for (int i = 0; i < rows; i++) {
             if (data[i].length != cols){
                 throw new IllegalArgumentException("Rows are not equal");
@@ -48,6 +49,14 @@ public class Matrix {
         data[row][col] = value;
     }
 
+    public void print(){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++){
+                System.out.print(data[i][j].toString() + " ");
+            }
+            System.out.println("");
+        }
+    }
     public Matrix add(Matrix other){
         if (rows != other.getRows() || cols != other.getCols()){
             throw new IllegalArgumentException("Matrices of different dimension");
@@ -61,4 +70,5 @@ public class Matrix {
 
         return result;
     }
+
 }
