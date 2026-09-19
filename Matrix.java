@@ -8,7 +8,6 @@ public class Matrix {
         if (rows <= 0 || cols <= 0){
             throw new IllegalArgumentException("Not the correct size");
         }
-
         this.rows = rows;
         this.cols = cols;
         this.data = new Complex[rows][cols];
@@ -145,8 +144,6 @@ public class Matrix {
         return determinant;
     }
 
-
-
     public Matrix inverse() {
         if (rows != cols) {
             throw new IllegalArgumentException("No inverse matrix");
@@ -196,7 +193,6 @@ public class Matrix {
 
     public Matrix divide(Matrix other) {
         return this.multiply(other.inverse());
-
     }
 }
 
