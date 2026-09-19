@@ -12,6 +12,10 @@ public class Matrix {
         this.rows = rows;
         this.cols = cols;
         this.data = new Complex[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+
+        }
     }
 
     public int getRows() {
