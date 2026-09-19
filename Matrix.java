@@ -189,7 +189,7 @@ public class Matrix {
         }
         Complex[][] result = new Complex[rows][rows];
         for (int i = 0; i < rows; i++) {
-            System.arraycopy(augmented[i], 0 + rows, result[i], 0, rows);
+            System.arraycopy(augmented[i], rows, result[i], 0, rows);
         }
         return new Matrix(result);
     }
