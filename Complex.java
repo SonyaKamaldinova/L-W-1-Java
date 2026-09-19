@@ -39,7 +39,6 @@ public class Complex {
         if (imaginary < 0) {
             return real + "-" + imaginary + "i";
         }
-
         return String.valueOf(real);
     }
 
