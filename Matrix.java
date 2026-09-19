@@ -126,9 +126,8 @@ public class Matrix {
                     pivotRow = j;
                 }
             }
-            if (copy[pivotRow][i].abs() < 1e-10) {
+            if (copy[pivotRow][i].abs() == 0) {
                 return new Complex(0, 0);
-
             }
             if (pivotRow != i) {
                 Complex[] tmp = copy[i];
