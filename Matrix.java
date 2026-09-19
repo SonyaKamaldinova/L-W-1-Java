@@ -47,4 +47,18 @@ public class Matrix {
     public void set(int row, int col, Complex value) {
         data[row][col] = value;
     }
+
+    public Matrix add(Matrix other){
+        if (rows != other.getRows() || cols != other.getCols()){
+            throw new IllegalArgumentException("Matrices of different dimension");
+        }
+        Matrix result = new Matrix(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++){
+                result.set(i, j, data[i][j].add(other.get(i, j)));
+            }
+        }
+
+        return result;
+    }
 }
