@@ -109,21 +109,80 @@ public class Main {
                 System.out.println("Do not have this option");
                 System.exit(1);
         }
-        int optAct = scanner1.nextInt();
-        switch (optAct){
-            case 0:
-                System.exit(0);
+        boolean running = true;
+        while (running){
+            System.out.println("Choose the option");
+            int optAct = scanner1.nextInt();
+            switch (optAct){
+                case 0:
+                    running = false;
+                    System.exit(0);
 
-            case 1:
-                Matrix result = A.add(B);
-                System.out.println("A + B:");
-                System.out.println(result);
+                case 1:
+                    Matrix result1 = A.add(B);
+                    System.out.println("A + B:");
+                    result1.print();
+                    break;
 
-            default:
-                System.out.println("Do not have this option");
-                System.exit(1);
+                case 2:
+                    Matrix Bn = new Matrix(B.getRows(), B.getCols());
+                    for (int i = 0; i < B.getRows(); i++) {
+                        for (int j = 0; j < B.getCols(); j++){
+                            Bn.set(i, j, B.get(i, j).negate());
+                        }
+                    }
+                    Matrix result2 = A.add(Bn);
+                    System.out.println("A - B:");
+                    result2.print();
+                    break;
 
+                case 3:
+                    Matrix result3 = A.multiply(B);
+                    System.out.println("A * B:");
+                    result3.print();
+                    break;
 
+                case 4:
+                    Complex determinantA = A.determinant();
+                    Complex determinantB = B.determinant();
+                    System.out.println("det(A) = " + determinantA);
+                    System.out.println("det(B) = " + determinantB);
+                    break;
+
+                case 5:
+                    Matrix inverseA = A.inverse();
+                    Matrix inverseB = B.inverse();
+                    System.out.println("A^-1:");
+                    inverseA.print();
+                    System.out.println("B^-1:");
+                    inverseB.print();
+                    break;
+
+                case 6:
+                    Matrix result6 = A.divide(B);
+                    System.out.println("A / B:");
+                    result6.print();
+                    break;
+
+                case 7:
+                    Matrix transposedA = A.transpose();
+                    Matrix transposedB = B.transpose();
+                    System.out.println("A^T:");
+                    transposedA.print();
+                    System.out.println("B^T:");
+                    transposedB.print();
+                    break;
+
+                case 8:
+                    A.print();
+                    B.print();
+                    break;
+
+                default:
+                    System.out.println("Do not have this option");
+                    running = false;
+                    System.exit(1);
+            }
         }
     }
 
