@@ -119,9 +119,8 @@ public class Main {
                     System.exit(0);
 
                 case 1:
-                    Matrix result1 = A.add(B);
                     System.out.println("A + B:");
-                    result1.print();
+                    A.add(B).print();
                     break;
 
                 case 2:
@@ -131,51 +130,53 @@ public class Main {
                             Bn.set(i, j, B.get(i, j).negate());
                         }
                     }
-                    Matrix result2 = A.add(Bn);
                     System.out.println("A - B:");
-                    result2.print();
+                    A.add(Bn).print();
                     break;
 
                 case 3:
-                    Matrix result3 = A.multiply(B);
                     System.out.println("A * B:");
-                    result3.print();
+                    A.multiply(B).print();
                     break;
 
                 case 4:
-                    Complex determinantA = A.determinant();
-                    Complex determinantB = B.determinant();
-                    System.out.println("det(A) = " + determinantA);
-                    System.out.println("det(B) = " + determinantB);
+                    System.out.println("det(A) = " + A.determinant());
+                    System.out.println("det(B) = " + B.determinant());
                     break;
 
                 case 5:
-                    Matrix inverseA = A.inverse();
-                    Matrix inverseB = B.inverse();
                     System.out.println("A^-1:");
-                    inverseA.print();
+                    A.inverse().print();
                     System.out.println("B^-1:");
-                    inverseB.print();
+                    B.inverse().print();
                     break;
 
                 case 6:
-                    Matrix result6 = A.divide(B);
                     System.out.println("A / B:");
-                    result6.print();
+                    A.divide(B).print();
                     break;
 
                 case 7:
-                    Matrix transposedA = A.transpose();
-                    Matrix transposedB = B.transpose();
                     System.out.println("A^T:");
-                    transposedA.print();
+                    A.transpose().print();
                     System.out.println("B^T:");
-                    transposedB.print();
+                    B.transpose().print();
                     break;
 
                 case 8:
+                    System.out.println("A:");
                     A.print();
+                    System.out.println("B:");
                     B.print();
+                    break;
+
+                case 9:
+                    String input = scanner2.nextLine();
+                    Complex num = Complex.parse(input);
+                    System.out.println("A * n:");
+                    A.multiply(num).print();
+                    System.out.println("B * n:");
+                    B.multiply(num).print();
                     break;
 
                 default:
