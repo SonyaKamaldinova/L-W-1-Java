@@ -8,12 +8,16 @@ public class Complex {
         this.imaginary = imaginary;
     }
 
-    public double getReal() {
+    public double getReal(){
         return real;
     }
 
-    public double getImaginary() {
+    public double getImaginary(){
         return imaginary;
+    }
+
+    public Complex negate(){
+        return new Complex(-real, -imaginary);
     }
 
     public Complex add(Complex other){
