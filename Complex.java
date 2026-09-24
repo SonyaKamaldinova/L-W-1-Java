@@ -48,9 +48,7 @@ public class Complex {
     }
 
     public static Complex parse(String input){
-        input = input.trim().replace(" ", "");
         if (!input.contains("i")){
-            input = input.trim().replace("i", "");
             return new Complex(Double.parseDouble(input), 0);
         }
         input = input.trim().replace("i", "");
