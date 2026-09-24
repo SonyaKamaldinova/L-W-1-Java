@@ -65,9 +65,11 @@ public class Complex {
             double imaginary;
             if (input.equals("i")) {
                 imaginary = 1;
-            } else if (input.equals("-i")) {
+            }
+            else if (input.equals("-i")) {
                 imaginary = -1;
-            } else {
+            }
+            else {
                 imaginary = Double.parseDouble(input);
             }
             return new Complex(0, imaginary);
