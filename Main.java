@@ -93,12 +93,7 @@ public class Main {
                 for (int i = 0; i < rows2; i++) {
                     for (int j = 0; j < cols2; j++) {
                         String input = scanner2.nextLine();
-                        try {
-                            data[i][j] = Complex.parse(input);
-                        }
-                        catch (NumberFormatException e) {
-                            System.out.println("Not the correct format!");
-                        }
+                        data[i][j] = Complex.parse(input);
                     }
                 }
                 B = new Matrix(data);
@@ -112,6 +107,18 @@ public class Main {
         boolean running = true;
         while (running){
             System.out.println("Choose the option");
+            System.out.println("0 - Exit");
+            System.out.println("1 - A + B");
+            System.out.println("2 - A - B");
+            System.out.println("3 - A * B");
+            System.out.println("4 - Determinant");
+            System.out.println("5 - Inverse matrix");
+            System.out.println("6 - A / B");
+            System.out.println("7 - Transpose");
+            System.out.println("8 - Print");
+            System.out.println("9 - Multiplied by the number");
+            System.out.println("10 - Change A");
+            System.out.println("11 - Change B");
             int optAct = scanner1.nextInt();
             switch (optAct){
                 case 0:
@@ -171,12 +178,39 @@ public class Main {
                     break;
 
                 case 9:
+                    System.out.println("Number in format 'a+bi':");
                     String input = scanner2.nextLine();
                     Complex num = Complex.parse(input);
-                    System.out.println("A * n:");
+                    System.out.println("n * A:");
                     A.multiply(num).print();
-                    System.out.println("B * n:");
+                    System.out.println("n * B:");
                     B.multiply(num).print();
+                    break;
+
+                case 10:
+                    Complex[][] dataA = new Complex[A.getRows()][A.getCols()];
+                    System.out.println("Values in format 'a+bi':");
+                    for (int i = 0; i < A.getRows(); i++) {
+                        for (int j = 0; j < A.getCols(); j++) {
+                            String inputA = scanner2.nextLine();
+                            dataA[i][j] = Complex.parse(inputA);
+                        }
+                    }
+                    A = new Matrix(dataA);
+                    System.out.println("Matrix changed!");
+                    break;
+
+                case 11:
+                    Complex[][] dataB = new Complex[B.getRows()][B.getCols()];
+                    System.out.println("Values in format 'a+bi':");
+                    for (int i = 0; i < B.getRows(); i++) {
+                        for (int j = 0; j < B.getCols(); j++) {
+                            String inputB = scanner2.nextLine();
+                            dataB[i][j] = Complex.parse(inputB);
+                        }
+                    }
+                    B = new Matrix(dataB);
+                    System.out.println("Matrix changed!");
                     break;
 
                 default:
@@ -186,5 +220,4 @@ public class Main {
             }
         }
     }
-
 }
