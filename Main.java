@@ -14,40 +14,58 @@ public class Main {
         switch (optA){
             case 1:
                 System.out.println("Rows:");
-                int rows1 = scanner1.nextInt();
-                if (rows1 == 0) {
-                    throw new IllegalArgumentException("Not the correct size");
+                try {
+                    int rows1 = scanner1.nextInt();
+                    if (rows1 == 0) {
+                        throw new IllegalArgumentException("Not the correct size");
+                    }
+                    System.out.println("Cols:");
+                    int cols1 = scanner1.nextInt();
+                    if (cols1 == 0) {
+                        throw new IllegalArgumentException("Not the correct size");
+                    }
+                    A = new Matrix(rows1, cols1);
+                    System.out.println("Matrix A created!");
                 }
-                System.out.println("Cols:");
-                int cols1 = scanner1.nextInt();
-                if (cols1 == 0) {
-                    throw new IllegalArgumentException("Not the correct size");
+                catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    System.exit(1);
                 }
-                A = new Matrix(rows1, cols1);
-                System.out.println("Matrix A created!");
                 break;
 
             case 2:
                 System.out.println("Rows:");
-                int rows2 = scanner1.nextInt();
-                if (rows2 == 0) {
-                    throw new IllegalArgumentException("Not the correct size");
-                }
-                System.out.println("Cols:");
-                int cols2 = scanner1.nextInt();
-                if (cols2 == 0) {
-                    throw new IllegalArgumentException("Not the correct size");
-                }
-                Complex[][] data = new Complex[rows2][cols2];
-                System.out.println("Values in format 'a+bi':");
-                for (int i = 0; i < rows2; i++) {
-                    for (int j = 0; j < cols2; j++) {
-                        String input = scanner2.nextLine();
-                        data[i][j] = Complex.parse(input);
+                try {
+                    int rows2 = scanner1.nextInt();
+                    if (rows2 == 0) {
+                        throw new IllegalArgumentException("Not the correct size");
                     }
+                    System.out.println("Cols:");
+                    int cols2 = scanner1.nextInt();
+                    if (cols2 == 0) {
+                        throw new IllegalArgumentException("Not the correct size");
+                    }
+                    Complex[][] data = new Complex[rows2][cols2];
+                    System.out.println("Values in format 'a+bi':");
+                    for (int i = 0; i < rows2; i++) {
+                        for (int j = 0; j < cols2; j++) {
+                            String input = scanner2.nextLine();
+                            try {
+                                data[i][j] = Complex.parse(input);
+                            }
+                            catch (NumberFormatException e) {
+                                System.out.println("Values in format 'a+bi':");
+                            }
+                            j--;
+                        }
+                    }
+                    A = new Matrix(data);
+                    System.out.println("Matrix created!");
                 }
-                A = new Matrix(data);
-                System.out.println("Matrix created!");
+                catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    System.exit(1);
+                }
                 break;
 
             default:
@@ -63,41 +81,59 @@ public class Main {
         switch (optB){
             case 1:
                 System.out.println("Rows:");
-                int rows1 = scanner1.nextInt();
-                if (rows1 == 0) {
-                    throw new IllegalArgumentException("Not the correct size");
+                try {
+                    int rows1 = scanner1.nextInt();
+                    if (rows1 == 0) {
+                        throw new IllegalArgumentException("Not the correct size");
+                    }
+                    System.out.println("Cols:");
+                    int cols1 = scanner1.nextInt();
+                    if (cols1 == 0) {
+                        throw new IllegalArgumentException("Not the correct size");
+                    }
+                    B = new Matrix(rows1, cols1);
+                    System.out.println("Matrix created!");
                 }
-                System.out.println("Cols:");
-                int cols1 = scanner1.nextInt();
-                if (cols1 == 0) {
-                    throw new IllegalArgumentException("Not the correct size");
+                catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    System.exit(1);
                 }
-                B = new Matrix(rows1, cols1);
-                System.out.println("Matrix created!");
                 break;
 
             case 2:
                 System.out.println("Rows:");
-                int rows2 = scanner1.nextInt();
-                if (rows2 == 0) {
-                    throw new IllegalArgumentException("Not the correct size");
-                }
-                System.out.println("Cols:");
-                int cols2 = scanner1.nextInt();
-                if (cols2 == 0) {
-                    throw new IllegalArgumentException("Not the correct size");
-                }
-                B = new Matrix(rows2, cols2);
-                Complex[][] data = new Complex[rows2][cols2];
-                System.out.println("Values in format 'a+bi':");
-                for (int i = 0; i < rows2; i++) {
-                    for (int j = 0; j < cols2; j++) {
-                        String input = scanner2.nextLine();
-                        data[i][j] = Complex.parse(input);
+                try {
+                    int rows2 = scanner1.nextInt();
+                    if (rows2 == 0) {
+                        throw new IllegalArgumentException("Not the correct size");
                     }
+                    System.out.println("Cols:");
+                    int cols2 = scanner1.nextInt();
+                    if (cols2 == 0) {
+                        throw new IllegalArgumentException("Not the correct size");
+                    }
+                    B = new Matrix(rows2, cols2);
+                    Complex[][] data = new Complex[rows2][cols2];
+                    System.out.println("Values in format 'a+bi':");
+                    for (int i = 0; i < rows2; i++) {
+                        for (int j = 0; j < cols2; j++) {
+                            String input = scanner2.nextLine();
+                            try {
+                                data[i][j] = Complex.parse(input);
+                            }
+                            catch (NumberFormatException e) {
+                                System.out.println("Values in format 'a+bi':");
+                            }
+                            j--;
+                        }
+                    }
+                    B = new Matrix(data);
+                    System.out.println("Matrix B created!");
                 }
-                B = new Matrix(data);
-                System.out.println("Matrix B created!");
+                catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    System.exit(1);
+                }
                 break;
 
             default:
@@ -127,7 +163,12 @@ public class Main {
 
                 case 1:
                     System.out.println("A + B:");
-                    A.add(B).print();
+                    try {
+                        A.add(B).print();
+                    }
+                    catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 2:
@@ -138,29 +179,59 @@ public class Main {
                         }
                     }
                     System.out.println("A - B:");
-                    A.add(Bn).print();
+                    try {
+                        A.add(Bn).print();
+                    }
+                    catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 3:
                     System.out.println("A * B:");
-                    A.multiply(B).print();
+                    try {
+                        A.multiply(B).print();
+                    }
+                    catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 4:
-                    System.out.println("det(A) = " + A.determinant());
-                    System.out.println("det(B) = " + B.determinant());
+                    try {
+                        System.out.println("det(A) = " + A.determinant());
+                        System.out.println("det(B) = " + B.determinant());
+                    }
+                    catch (IllegalArgumentException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 5:
                     System.out.println("A^-1:");
-                    A.inverse().print();
+                    try {
+                        A.inverse().print();
+                    }
+                    catch (IllegalArgumentException | ArithmeticException e){
+                        System.out.println(e.getMessage());
+                    }
                     System.out.println("B^-1:");
-                    B.inverse().print();
+                    try {
+                        B.inverse().print();
+                    }
+                    catch (IllegalArgumentException | ArithmeticException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 6:
                     System.out.println("A / B:");
-                    A.divide(B).print();
+                    try {
+                        A.divide(B).print();
+                    }
+                    catch (IllegalArgumentException | ArithmeticException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 7:
@@ -193,7 +264,13 @@ public class Main {
                     for (int i = 0; i < A.getRows(); i++) {
                         for (int j = 0; j < A.getCols(); j++) {
                             String inputA = scanner2.nextLine();
-                            dataA[i][j] = Complex.parse(inputA);
+                            try {
+                                dataA[i][j] = Complex.parse(inputA);
+                            }
+                            catch (NumberFormatException e) {
+                                System.out.println("Values in format 'a+bi':");
+                            }
+                            j--;
                         }
                     }
                     A = new Matrix(dataA);
@@ -206,7 +283,13 @@ public class Main {
                     for (int i = 0; i < B.getRows(); i++) {
                         for (int j = 0; j < B.getCols(); j++) {
                             String inputB = scanner2.nextLine();
-                            dataB[i][j] = Complex.parse(inputB);
+                            try {
+                                dataB[i][j] = Complex.parse(inputB);
+                            }
+                            catch (NumberFormatException e) {
+                                System.out.println("Values in format 'a+bi':");
+                            }
+                            j--;
                         }
                     }
                     B = new Matrix(dataB);
